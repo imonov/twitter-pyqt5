@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+env/
+.venv/
+.env/
+
+# PyCharm
+.idea/
+
+# VS Code
+.vscode/
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+*.log.*
+
+# SQLite database files (agar ishlatilsa)
+*.sqlite3
+*.db
+
+# PyQt5 / Qt Creator
+*.pro.user
+*.qrc
+*.ui.py
+*.py~ 
+*.qmlc
+*.qrc.py
+*.qrc~
+
+# Build / dist
+build/
+dist/
+*.egg-info/
+*.egg
+*.whl
+
+# Coverage
+.coverage
+htmlcov/
+.coverage.*
+
+# MySQL / DB dumps (agar kerak bo'lsa)
+*.sql
+*.dump
