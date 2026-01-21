@@ -6,7 +6,7 @@ class MySQL:
         self.connect()
         self.createDatabase()
         self.createUsersTable()
-        self.createPostsTable()
+        # self.createPostsTable()
         self.insertTestUser()
 
     def connect(self):
@@ -36,17 +36,17 @@ class MySQL:
             );     
         ''')
 
-    def createPostsTable(self):
-        self.cur.execute('''
-            CREATE TABLE IF NOT EXISTS posts(
-                id INT AUTO_INCREMENT PRIMARY KEY,
-                title VARCHAR(100) NOT NULL,
-                post_text TEXT NOT NULL,
-                author_id INT,
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP),
-                FOREIGN KEY (author_id) REFERENCES users(id)
-            );                 
-    ''')
+    # def createPostsTable(self):
+    #     self.cur.execute('''
+    #         CREATE TABLE IF NOT EXISTS posts(
+    #             id INT AUTO_INCREMENT PRIMARY KEY,
+    #             title VARCHAR(100) NOT NULL,
+    #             post_text TEXT NOT NULL,
+    #             author_id INT,
+    #             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP),
+    #             FOREIGN KEY (author_id) REFERENCES users(id)
+    #         );
+    # ''')
 
     def insertTestUser(self):
         self.cur.execute('''

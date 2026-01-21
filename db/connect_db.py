@@ -22,7 +22,7 @@ class MySQL:
 
     def loginUser(self, username):
         self.cur.execute(
-            f'''SELECT id, username, password FROM users WHERE username = "{username}";''')
+            f'''SELECT id, username, password, fullname FROM users WHERE username = "{username}";''')
         return self.cur.fetchone()
 
     def deleteUser(self, id, username):
@@ -39,5 +39,10 @@ class MySQL:
         self.cur.execute(f'''
             SELECT title, post_text, p.created_at, u.fullname FROM posts as p JOIN users AS u ON p.author_id = u.id                  
         ''')
+        return self.cur.fetchall()
 
+    def getPostById(self, id):
+        self.cur.execute(f'''
+            SELECT * FROM posts WHERE author_id = {id};                 
+        ''')
         return self.cur.fetchall()

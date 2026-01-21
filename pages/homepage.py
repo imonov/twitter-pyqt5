@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QIcon
 from db.connect_db import MySQL
 from pages.new_twit import CreateTwit
+from pages.profile_page import ProfilePage
 
 
 class HomePage(QWidget):
@@ -16,7 +17,6 @@ class HomePage(QWidget):
 
         self.setGeometry(100, 100, 400, 500)
         self.setStyleSheet("* {font-size: 22px;}")
-        self.getAllPosts()
         self.main_v_lay = QVBoxLayout()
         self.title_h_lay = QHBoxLayout()
 
@@ -35,17 +35,21 @@ class HomePage(QWidget):
         self.main_v_lay.addLayout(self.title_h_lay)
 
         # Post qismi
-        # self.post_v_lay = QVBoxLayout()
+        self.post_v_lay = QVBoxLayout()
+        for x in self.getAllPosts():
+            self.post_v_lay.addWidget(QPushButton(f"{x[0]}\n{x[1]}"))
         print(self.posts)
 
-        # self.main_v_lay.addLayout(self.post_v_lay)
+        self.main_v_lay.addLayout(self.post_v_lay)
 
         # Post qismi tugadi
 
         self.setLayout(self.main_v_lay)
 
     def profile(self):
-        pass
+        self.profile_window = ProfilePage(self, self.user)
+        self.hide()
+        self.profile_window.show()
 
     def writePost(self):
         self.close()
@@ -53,9 +57,7 @@ class HomePage(QWidget):
         self.new_twit.show()
 
     def getAllPosts(self):
-        self.posts = self.mysql.getPosts()
-        # post = QPushButton(f"{p[0]}\n{p[1]}\n{p[3]} - {p[2]}")
-        # self.post_v_lay.addWidget(post)
+        return self.mysql.getPosts()
 
     def showEvent(self, event):
         self.getAllPosts()
