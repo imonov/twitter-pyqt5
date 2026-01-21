@@ -23,14 +23,13 @@ class ProfilePage(QWidget):
         self.profile_image.setFixedSize(50, 50)
         self.title_h_lay.addWidget(self.profile_image)
 
-        self.title_h_lay.addStretch()
-
         self.title_v_lay = QVBoxLayout()
         self.full_name = QLabel(self.user[3])
         self.user_name = QLabel(self.user[1])
         self.title_v_lay.addWidget(self.full_name)
         self.title_v_lay.addWidget(self.user_name)
         self.title_h_lay.addLayout(self.title_v_lay)
+        self.title_h_lay.addStretch()
 
         self.main_v_lay.addLayout(self.title_h_lay)
         self.main_v_lay.addStretch()

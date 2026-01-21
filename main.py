@@ -5,5 +5,6 @@ from pages.login import LoginPage
 
 app = QApplication([])
 win = LoginPage()
+
 win.show()
 app.exec_()

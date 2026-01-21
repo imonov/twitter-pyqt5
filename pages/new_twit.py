@@ -36,6 +36,7 @@ class CreateTwit(QWidget):
 
         self.btn_h_lay = QHBoxLayout()
         self.btn_back = QPushButton("Orqaga qaytish")
+        self.btn_back.clicked.connect(self.Back)
         self.btn_post = QPushButton("Yangi post")
         self.btn_post.clicked.connect(self.createPost)
 
@@ -45,6 +46,11 @@ class CreateTwit(QWidget):
         self.main_v_lay.addLayout(self.btn_h_lay)
 
         self.setLayout(self.main_v_lay)
+
+    def Back(self):
+        self.close()
+        self.home_page.getAllPosts()
+        self.home_page.show()
 
     def createPost(self):
         if not self.title.text() or not self.text.toPlainText():
@@ -58,6 +64,4 @@ class CreateTwit(QWidget):
             self.text.toPlainText()
         )
 
-        self.close()
-        self.home_page.getAllPosts()
-        self.home_page.show()
+        self.Back()
