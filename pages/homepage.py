@@ -12,13 +12,15 @@ class HomePage(QWidget):
 
         self.user = user
 
+        self.posts = None
+
         self.setGeometry(100, 100, 400, 500)
         self.setStyleSheet("* {font-size: 22px;}")
-
+        self.getAllPosts()
         self.main_v_lay = QVBoxLayout()
         self.title_h_lay = QHBoxLayout()
 
-        self.btn_profile = QPushButton(self.user[2])
+        self.btn_profile = QPushButton(f"/@{self.user[1]}")
         self.btn_profile.setIcon(QIcon('images/user.svg'))
         self.btn_profile.clicked.connect(self.profile)
 
@@ -33,10 +35,10 @@ class HomePage(QWidget):
         self.main_v_lay.addLayout(self.title_h_lay)
 
         # Post qismi
-        self.post_v_lay = QVBoxLayout()
-        self.getAllPosts()
+        # self.post_v_lay = QVBoxLayout()
+        print(self.posts)
 
-        self.main_v_lay.addLayout(self.post_v_lay)
+        # self.main_v_lay.addLayout(self.post_v_lay)
 
         # Post qismi tugadi
 
@@ -46,12 +48,14 @@ class HomePage(QWidget):
         pass
 
     def writePost(self):
-        self.hide()
+        self.close()
         self.new_twit = CreateTwit(self.user[0], self)
         self.new_twit.show()
 
     def getAllPosts(self):
-        for p in self.mysql.getPosts():
-            print(p)
-            post = QPushButton(f"{p[0]}\n{p[1]}\n{p[3]} - {p[2]}")
-            self.post_v_lay.addWidget(post)
+        self.posts = self.mysql.getPosts()
+        # post = QPushButton(f"{p[0]}\n{p[1]}\n{p[3]} - {p[2]}")
+        # self.post_v_lay.addWidget(post)
+
+    def showEvent(self, event):
+        self.getAllPosts()

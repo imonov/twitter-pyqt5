@@ -48,11 +48,16 @@ class CreateTwit(QWidget):
 
     def createPost(self):
         if not self.title.text() or not self.text.toPlainText():
-            self.msg = QMessageBox()
-            self.msg.setText("Kerakli maydonlarni to'ldiring...")
-            self.msg.setIcon(QMessageBox.Warning)
-        else:
-            self.mysql.createPost(
-                self.id, self.title.text(), self.text.toPlainText())
-            self.hide()
-            self.home_page.show()
+            QMessageBox.warning(
+                self, "Xatolik", "Kerakli maydonlarni to‘ldiring")
+            return
+
+        self.mysql.createPost(
+            self.id,
+            self.title.text(),
+            self.text.toPlainText()
+        )
+
+        self.close()
+        self.home_page.getAllPosts()
+        self.home_page.show()
